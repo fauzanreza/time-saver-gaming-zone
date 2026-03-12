@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium Professional Gaming Palette - UNIFORM PURPLE */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 90% 65%; /* Consistent Purple */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 263 90% 50%; /* Darker Purple for Secondary */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 47% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 263 90% 75%; /* Lighter Purple for Accents */
+    --accent-foreground: 222 47% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 47% 15%;
+    --input: 222 47% 15%;
+    --ring: 263 90% 65%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 47% 4%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 263 90% 65%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 263 90% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 10%;
+    --sidebar-ring: 263 90% 65%;
+  }
+
+  .light {
+    --background: 263 20% 98%; /* Slightly purplish white */
+    --foreground: 263 47% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 263 47% 10%;
+
+    --primary: 263 90% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 263 90% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 263 20% 95%;
+    --muted-foreground: 263 16% 45%;
+
+    --accent: 263 90% 70%;
+    --accent-foreground: 263 47% 10%;
+
+    --border: 263 20% 90%;
+    --input: 263 20% 90%;
+    --ring: 263 90% 65%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 263 47% 15%;
+    --sidebar-primary: 263 90% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 263 20% 96%;
+    --sidebar-accent-foreground: 263 47% 10%;
+    --sidebar-border: 263 20% 92%;
+    --sidebar-ring: 263 90% 60%;
+
+    --card-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.15);
+    --card-inner: rgba(139, 92, 246, 0.05);
+  }
+
+  .dark {
+    --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    --card-inner: rgba(255, 255, 255, 0.05);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', sans-serif;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(263, 90%, 65%, 0.05) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(199, 89%, 48%, 0.05) 0, transparent 50%);
+  }
+
+  /* Custom scrollbar for the gaming theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+
+  /* Status indicators */
+  .status-available {
+    @apply bg-green-500;
+  }
+  
+  .status-in-use {
+    @apply bg-blue-500;
+  }
+  
+  .status-ending-soon {
+    @apply bg-amber-500;
+  }
+  
+  .status-offline {
+    @apply bg-gray-500;
+  }
+
+  /* Professional Enterprise Gaming Card */
+  .gaming-card {
+    @apply border border-border bg-card/80 backdrop-blur-md rounded-xl overflow-hidden transition-all duration-300;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .gaming-card:hover {
+    @apply border-primary/30;
+    box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.2);
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl;
+  }
+
+  .neon-glow-primary {
+    box-shadow: 0 0 15px hsla(var(--primary), 0.3);
+  }
+
+  .neon-glow-secondary {
+    box-shadow: 0 0 15px hsla(var(--secondary), 0.3);
+  }
+
+  /* Dashboard grid layout */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Pulsing animation for active status */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}

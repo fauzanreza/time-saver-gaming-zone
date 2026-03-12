@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_DB_URL")
+}
+
+model Device {
+  id           String   @id @default(cuid())
+  name         String
+  type         String
+  deviceType   DeviceType @relation("CategoryToDevices", fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
+  status       String
+  hourlyRate   Float
+  specs        String?
+  image        String?
+  images       String? @db.LongText // Can store JSON string
+  sessions     Session[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model DeviceType {
+  id         String   @id @default(cuid())
+  name       String
+  value      String   @unique
+  hourlyRate Float
+  isSystem   Boolean  @default(false)
+  devices    Device[] @relation("CategoryToDevices")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Session {
+  id            String   @id @default(cuid())
+  deviceId      String
+  device        Device   @relation(fields: [deviceId], references: [id])
+  startTime     DateTime
+  endTime       DateTime?
+  duration      Int      // in minutes
+  remainingTime Int      // in minutes
+  timeExtended  Boolean  @default(false)
+  amountCharged Float?
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SavedTime {
+  id                 String   @id @default(cuid())
+  customerIdentifier String
+  minutes            Int
+  expiresAt          DateTime?
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RevenueReport {
+  id            String   @id @default(cuid())
+  date          String   @unique
+  totalRevenue  Float
+  deviceRevenue String   // Store JSON string
+  sessionCount  Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Alert {
+  id         String   @id @default(cuid())
+  deviceId   String
+  deviceName String
+  type       String
+  message    String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DurationSuggestion {
+  id        String   @id @default(cuid())
+  label     String
+  minutes   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
