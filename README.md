@@ -1,74 +1,70 @@
-# Welcome to your Lovable project
+# Time Machines Gaming Zone
 
-## Project info
+**Time Machines Gaming Zone** is a modern, responsive, enterprise-grade web application tailored to manage a netcafe or gaming center business. Built with a stunning purple-themed, futuristic interface, it provides comprehensive tools to manage devices, monitor active sessions, analyze revenue, and convey real-time status to customers.
 
-**URL**: https://lovable.dev/projects/f5fd7c74-6f22-4da2-9d0f-de222dd85235
+## 🚀 Features
 
-## How can I edit this code?
+### For Administrators
+- **Interactive Dashboard**: Real-time overview of active sessions, total available devices, daily revenue, and system uptime.
+- **Device Management**: Add, update, and remove devices (PC, PlayStation, VR, etc.). Track their status in real time (Available, In Use, Ending Soon, Offline).
+- **Session Tracking**: Start sessions, monitor progress, view remaining time, and automatically calculate costs based on configurable hourly rates.
+- **Saved Time Vault**: Allow customers to save their unused session time. Banked time can be securely stored and easily retrieved for their next visit.
+- **Analytics & Reporting**: Deep insights into business metrics. Visualize revenue growth, utilization history, and device earnings distributions using interactive charts. Export these reports straight to Excel.
+- **Historical Ledger**: Comprehensive archive logging all completed transactions and historical sessions.
+- **Dynamic Configuration**: Easily manage pricing rates, device categories, duration presets, and switch between Light, Dark, or System UI themes seamlessly.
 
-There are several ways of editing your application.
+### For Customers
+- **Customer Kiosk View**: A simplified, distraction-free layout focusing solely on station discovery.
+- **Live Availability Tracking**: Customers can quickly identify which devices are occupied, check the remaining time on busy machines (Next Window), and spot stations that are immediately available for reservation. 
 
-**Use Lovable**
+## 🛠️ Technology Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f5fd7c74-6f22-4da2-9d0f-de222dd85235) and start prompting.
+- **Core Framework**: [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Architecture**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Data Visualization**: [Recharts](https://recharts.org/)
+- **Excel Exporting**: [SheetJS (xlsx)](https://sheetjs.com/)
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📦 Installation & Setup
 
-**Use your preferred IDE**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/fauzanreza/time-saver-gaming-zone.git
+   cd time-saver-gaming-zone
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Install dependencies:**
+   Make sure you have Node.js and npm installed.
+   ```bash
+   npm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+4. **Launch the platform:**
+   Navigate your browser to `http://localhost:5173` to see the application live.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📱 Fully Responsive
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+The application is meticulously designed and extensively optimized for any screen size:
+- **Desktop**: Enjoy the full enterprise management format featuring persistent sidebars, comprehensive grids, and expansive analytics.
+- **Mobile & Tablet**: Dynamic scaling, off-canvas hamburger navigation, touch-friendly horizontal-scrolling datatables, and carefully adjusted typography for unparalleled on-the-go management.
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🤝 Contributing
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Contributions, bug reports, and exciting feature requests are welcome!
 
-**Edit a file directly in GitHub**
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📄 License
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f5fd7c74-6f22-4da2-9d0f-de222dd85235) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-# time-saver-gaming-zone
+This project is open source and available under the [MIT License](LICENSE).
