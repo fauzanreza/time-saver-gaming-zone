@@ -28,6 +28,7 @@ export interface Device {
 export interface Session {
   id: string;
   deviceId: string;
+  customerName?: string;
   startTime: string;
   endTime?: string;
   duration: number; // in minutes
@@ -36,6 +37,7 @@ export interface Session {
   amountCharged?: number;
   notes?: string;
 }
+
 
 // Saved Time for Customers
 export interface SavedTime {

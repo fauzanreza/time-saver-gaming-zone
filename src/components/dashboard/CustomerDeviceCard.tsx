@@ -37,12 +37,12 @@ const CustomerDeviceCard: React.FC<CustomerDeviceCardProps> = ({
       ? [device.image]
       : [];
 
-  const handleStartSession = (duration: number) => {
+  const handleStartSession = (duration: number, customerName: string) => {
     try {
-      startSession(device.id, duration);
+      startSession(device.id, duration, customerName);
       toast({
         title: "Session Started",
-        description: `Started session on ${device.name}`,
+        description: `Started session on ${device.name} for ${customerName}`,
       });
       onSessionChange();
       setShowStartDialog(false);
@@ -54,6 +54,7 @@ const CustomerDeviceCard: React.FC<CustomerDeviceCardProps> = ({
       });
     }
   };
+
 
   return (
     <>

@@ -226,7 +226,7 @@ app.delete('/api/device-types/:id', async (req, res) => {
 
 app.post('/api/start-session', async (req, res) => {
   try {
-    const { deviceId, duration } = req.body;
+    const { deviceId, duration, customerName } = req.body;
     const device = await prisma.device.findUnique({ where: { id: deviceId } });
     if (!device) return res.status(404).json({ error: 'Device not found' });
     
@@ -236,6 +236,7 @@ app.post('/api/start-session', async (req, res) => {
       data: {
         id: `session-${Date.now()}`,
         deviceId,
+        customerName,
         startTime: new Date(),
         duration,
         remainingTime: duration,
@@ -249,6 +250,7 @@ app.post('/api/start-session', async (req, res) => {
     });
     
     res.json(session);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'failed' });

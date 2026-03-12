@@ -58,6 +58,8 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
   const [customMinutes, setCustomMinutes] = useState<number>(0);
   const [suggestions, setSuggestions] = useState<DurationSuggestion[]>([]);
   
+  const [customerName, setCustomerName] = useState("");
+  
   const [activeSession, setActiveSession] = useState(getActiveSession(device.id));
   const [remainingTime, setRemainingTime] = useState(activeSession?.remainingTime || 0);
   const [showGallery, setShowGallery] = useState(false);
@@ -86,6 +88,7 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
       setDurationMode("preset");
       setCustomHours(0);
       setCustomMinutes(0);
+      setCustomerName("");
     }
   }, [isStartSessionOpen]);
 
@@ -117,7 +120,11 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
 
   const handleStartSession = () => {
     try {
-      startSession(device.id, sessionDuration);
+      if (!customerName.trim()) {
+        toast.error("Please enter customer name");
+        return;
+      }
+      startSession(device.id, sessionDuration, customerName);
       toast.success(`Session started for ${device.name}`);
       setIsStartSessionOpen(false);
       if (onSessionChange) onSessionChange();
@@ -210,6 +217,10 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
             {activeSession && (
               <>
                 <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Customer:</span>
+                  <span className="font-medium text-primary">{activeSession.customerName || "Unknown"}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Started:</span>
                   <span>
                     {new Date(activeSession.startTime).toLocaleTimeString([], {
@@ -260,6 +271,17 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
                 </DialogDescription>
               </DialogHeader>
               <div className="py-4 space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="customer-name">Customer Name</Label>
+                  <Input 
+                    id="customer-name"
+                    placeholder="Enter customer name..."
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    autoFocus
+                  />
+                </div>
+
                 <div className="space-y-2">
                   <h4 className="text-sm font-medium">Select Duration</h4>
                   <div className="flex flex-wrap gap-2">
@@ -328,7 +350,7 @@ const DeviceCard = ({ device, onSessionChange, refreshKey }: { device: Device, o
                 <Button variant="outline" onClick={() => setIsStartSessionOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={handleStartSession} disabled={sessionDuration <= 0}>
+                <Button onClick={handleStartSession} disabled={sessionDuration <= 0 || !customerName.trim()}>
                   <PlayIcon className="h-4 w-4 mr-2" />
                   Start Session
                 </Button>

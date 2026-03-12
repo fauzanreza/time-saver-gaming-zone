@@ -147,7 +147,7 @@ export const parseIDRInput = (value: string): number => {
 };
 
 // New functions for session management
-export const startSession = (deviceId: string, duration: number): Session => {
+export const startSession = (deviceId: string, duration: number, customerName?: string): Session => {
   const device = getDeviceById(deviceId);
   
   if (!device) {
@@ -167,6 +167,7 @@ export const startSession = (deviceId: string, duration: number): Session => {
   const newSession: Session = {
     id: `session-${Date.now()}`,
     deviceId,
+    customerName,
     startTime: new Date().toISOString(),
     duration,
     remainingTime: duration,
@@ -177,11 +178,12 @@ export const startSession = (deviceId: string, duration: number): Session => {
   fetch('/api/start-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ deviceId, duration })
+    body: JSON.stringify({ deviceId, duration, customerName })
   }).catch(console.error);
   
   return newSession;
 };
+
 
 export const stopSession = (deviceId: string, saveRemainingTime: boolean): SavedTime | undefined => {
   const sessionIndex = activeSessions.findIndex(session => session.deviceId === deviceId);

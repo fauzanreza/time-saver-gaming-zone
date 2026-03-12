@@ -9,7 +9,7 @@ import type { Device, DurationSuggestion } from "@/lib/types";
 interface Props {
   open: boolean;
   onOpenChange: (v: boolean) => void;
-  onStartSession: (duration: number) => void;
+  onStartSession: (duration: number, customerName: string) => void;
   device: Device;
   defaultDuration?: number;
 }
@@ -25,6 +25,7 @@ const SessionStartDialog: React.FC<Props> = ({
   const [presetDuration, setPresetDuration] = useState(defaultDuration);
   const [customHours, setCustomHours] = useState<number>(0);
   const [customMinutes, setCustomMinutes] = useState<number>(0);
+  const [customerName, setCustomerName] = useState("");
   const [suggestions, setSuggestions] = useState<DurationSuggestion[]>([]);
   
   const sessionDuration = durationMode === "preset" 
@@ -48,6 +49,7 @@ const SessionStartDialog: React.FC<Props> = ({
       setPresetDuration(defaultDuration);
       setCustomHours(0);
       setCustomMinutes(0);
+      setCustomerName("");
     }
   }, [open, defaultDuration]);
 
@@ -61,8 +63,8 @@ const SessionStartDialog: React.FC<Props> = ({
   };
 
   const handleStart = () => {
-    if (sessionDuration > 0) {
-      onStartSession(sessionDuration);
+    if (sessionDuration > 0 && customerName.trim()) {
+      onStartSession(sessionDuration, customerName);
     }
   };
 
@@ -72,10 +74,21 @@ const SessionStartDialog: React.FC<Props> = ({
         <DialogHeader>
           <DialogTitle>Book {device.name}</DialogTitle>
           <DialogDescription>
-            Select how long you want to use this device.
+            Enter your name and select how long you want to use this device.
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="customer-name">Your Name</Label>
+            <Input 
+              id="customer-name"
+              placeholder="Enter your name..."
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              autoFocus
+            />
+          </div>
+
           <div className="space-y-4">
             <h4 className="text-sm font-medium">Session Duration</h4>
             <div className="flex flex-wrap gap-2">
@@ -144,7 +157,7 @@ const SessionStartDialog: React.FC<Props> = ({
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
-          <Button onClick={handleStart} disabled={sessionDuration <= 0}>
+          <Button onClick={handleStart} disabled={sessionDuration <= 0 || !customerName.trim()}>
             Confirm Booking
           </Button>
         </DialogFooter>
@@ -152,5 +165,6 @@ const SessionStartDialog: React.FC<Props> = ({
     </Dialog>
   );
 };
+
 
 export default SessionStartDialog;
